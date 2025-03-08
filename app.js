@@ -84,7 +84,7 @@ app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter);
 
 app.listen(8080, () => {
-    console.log("Server is listening to port 8080");
+    console.log("Server listening on http://localhost:8080");
 })
 
 app.all("*", (req, res, next) => {

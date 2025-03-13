@@ -32,9 +32,12 @@
       display: flex;
       align-items: center;
     }
-    .heart-i{
+    .clicked{
       font-size: 2.5rem;
-      color: rgb(219, 23, 88);
+      background-color: rgb(219, 23, 88);
+    }
+    .not-clicked{
+      font-size: 1rem;
     }
    </style>
 
@@ -94,14 +97,20 @@
 
 
     </div>
-
+    
 
     <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 listing-link mt-3">
         <% for(let listing of allListings){ %>
           <a href="/listings/<%= listing._id%>">
             <div class="card col listing-card">
                 <img src="<%= listing.image.url %>" class="card-img-top" alt="Listing_image" style="height: 20rem">
-              <div class="card-img-overlay"><i class="fa-solid fa-heart heart-i"></i></div>
+              <div class="card-img-overlay">
+                <!-- <%if(isChecked){ %>
+                  <div class="clicked"><i class="fa-solid fa-heart"></i></div>
+                <% } else { %>
+                  <div class="not-clicked"><i class="fa-regular fa-heart"></i></div>
+                <% } %> -->
+              </div>
                 <div class="card-body">
                   <p class="card-text">
                     <b><%= listing.title %></b><br>
@@ -116,6 +125,13 @@
 
     <script>
       let taxSwitch = document.getElementById("flexSwitchCheckDefault");
+
+      let clicked = document.querySelector('.clicked');
+      let notClicked = document.querySelector('.not-clicked');
+
+      clicked.addEventListener('click', () => {
+        
+      })
 
       taxSwitch.addEventListener("click", () => {
 

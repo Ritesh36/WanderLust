@@ -104,13 +104,14 @@
           <a href="/listings/<%= listing._id%>">
             <div class="card col listing-card">
                 <img src="<%= listing.image.url %>" class="card-img-top" alt="Listing_image" style="height: 20rem">
-              <div class="card-img-overlay">
-                <!-- <%if(isChecked){ %>
-                  <div class="clicked"><i class="fa-solid fa-heart"></i></div>
-                <% } else { %>
-                  <div class="not-clicked"><i class="fa-regular fa-heart"></i></div>
-                <% } %> -->
-              </div>
+                <% let isChecked = false; %> <!-- Define isChecked -->
+                <div class="card-img-overlay">
+                  <% if (isChecked) { %>
+                    <div class="clicked"><i class="fa-solid fa-heart"></i></div>
+                  <% } else { %>
+                    <div class="not-clicked"><i class="fa-regular fa-heart"></i></div>
+                  <% } %>
+                </div>
                 <div class="card-body">
                   <p class="card-text">
                     <b><%= listing.title %></b><br>

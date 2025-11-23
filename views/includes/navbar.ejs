@@ -31,26 +31,25 @@
     <a class="navbar-brand" href="/listings"><i class="fa-regular fa-compass"></i></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
 
       <div class="navbar-nav">
-        <a class="nav-link" href="/listings">Explore</a>
+        <a class="nav-link" href="/listings">Get Lost (In a good way)</a>
         &nbsp; &nbsp;
         <a class="nav-link" href="/ai-assist">AI Assistant</a>
       </div>
 
       <div class="navbar-nav ms-auto">
         <form class="d-flex" role="search" method="GET" action="/listings/search">
-          <input class="form-control me-2 search-inp" type="search" placeholder="Search destinations" name="q">
+          <input class="form-control me-2 search-inp" type="search" placeholder="Where on earth are you going?" name="q">
           <button class="btn btn-search" type="submit"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
         </form>
       </div>
 
       <div class="navbar-nav ms-auto">
-        <a class="nav-link" href="/listings/new">Airbnb your home</a>
+        <a class="nav-link" href="/listings/new">Turn your couch into cash</a>
         &nbsp; &nbsp;
         <% if(typeof currUser==='undefined' || !currUser){ %>
           <a class="nav-link" href="/signup"><b>Signup</b></a>

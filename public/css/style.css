@@ -112,10 +112,8 @@ body{
     display: flex !important;
 }
 
-.btn-flex{
+.btns {
     display: flex;
-    justify-content: start;
+    gap: 1rem;
     align-items: center;
-    gap: 60px;
-    margin-left: 200px;
 }

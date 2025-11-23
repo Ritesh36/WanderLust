@@ -53,13 +53,13 @@
           <div class="navbar-nav ms-auto">
                 <a class="nav-link" href="/listings/new">Airbnb your home</a>
                 &nbsp; &nbsp;
-                <% if(!currUser){ %>
+                <% if(typeof currUser === 'undefined' || !currUser){ %>
                   <a class="nav-link" href="/signup"><b>Signup</b></a>
                     &nbsp; &nbsp;
                   <a class="nav-link" href="/login"><b>Login</b></a>
                     &nbsp; &nbsp; 
                  <% } %>
-                 <% if(currUser){ %>
+                 <% if(typeof currUser !== 'undefined' && currUser){ %>
                   <a class="nav-link" href="/logout"><b>Logout</b></a>
                   &nbsp; &nbsp;
                  <% } %>

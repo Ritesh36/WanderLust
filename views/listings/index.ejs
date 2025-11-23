@@ -1,91 +1,145 @@
 <% layout("/layouts/boilerplate") %>
-<body>
 
-   <style>
-    #filters {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-    .filter {
-      text-align: center;
-      margin-right: 2rem;
-      margin-top: 2rem;
-      opacity: 0.6;
-    }
-    .filter:hover{
-      opacity: 1;
-      cursor: pointer;
-    }
-    .filter p {
-      font-size: 0.8rem;
-    }
-    .tax-info {
-      display: none;
-    }
-    .tax-switch {
-      border: 1px solid black;
-      border-radius: 1rem;
-      height: 3.25rem;
-      padding: 1rem;
-      margin-left: 3rem;
-      display: flex;
-      align-items: center;
-    }
-    .clicked{
-      font-size: 2.5rem;
-      background-color: rgb(219, 23, 88);
-    }
-    .not-clicked{
-      font-size: 1rem;
-    }
-   </style>
+  <body>
+
+    <style>
+      #filters {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+
+      .filter {
+        text-align: center;
+        margin-right: 2rem;
+        margin-top: 2rem;
+        opacity: 0.6;
+      }
+
+      .filter:hover {
+        opacity: 1;
+        cursor: pointer;
+      }
+
+      .filter p {
+        font-size: 0.8rem;
+      }
+
+      .tax-info {
+        display: none;
+      }
+
+      .tax-switch {
+        border: 1px solid black;
+        border-radius: 1rem;
+        height: 3.25rem;
+        padding: 1rem;
+        margin-left: 3rem;
+        display: flex;
+        align-items: center;
+      }
+
+      /* Like Button Styles */
+      .card-img-overlay {
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-start;
+        padding: 1rem;
+        pointer-events: none;
+      }
+
+      .listing-card:hover .card-img-overlay {
+        opacity: 1;
+      }
+
+      .like-btn {
+        background: transparent;
+        border: none;
+        padding: 0;
+        font-size: 1.5rem;
+        color: white;
+        pointer-events: auto;
+      }
+
+      .like-btn i.liked {
+        color: rgb(255, 56, 92);
+        /* Airbnb red */
+        opacity: 1;
+      }
+
+      .like-btn i {
+        filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
+      }
+    </style>
 
     <div id="filters">
-
       <div class="filter">
-        <div><i class="fa-solid fa-fire"></i></div>
-        <p>Trending</p>
+        <a href="/listings?category=Trending">
+          <div><i class="fa-solid fa-fire"></i></div>
+          <p>Trending</p>
+        </a>
       </div>
       <div class="filter">
-        <div><i class="fa-solid fa-bed"></i></div>
-        <p>Rooms</p>
+        <a href="/listings?category=Rooms">
+          <div><i class="fa-solid fa-bed"></i></div>
+          <p>Rooms</p>
+        </a>
       </div>
       <div class="filter">
-        <div><i class="fa-solid fa-mountain-city"></i></div>
-        <p>Iconic cities</p>
+        <a href="/listings?category=Iconic-cities">
+          <div><i class="fa-solid fa-mountain-city"></i></div>
+          <p>Iconic cities</p>
+        </a>
       </div>
       <div class="filter">
-        <div><i class="fa-solid fa-mountain"></i></div>
-        <p>Mountains</p>
+        <a href="/listings?category=Mountains">
+          <div><i class="fa-solid fa-mountain"></i></div>
+          <p>Mountains</p>
+        </a>
       </div>
       <div class="filter">
-        <div><i class="fa-brands fa-fort-awesome"></i></div>
-        <p>Castles</p>
+        <a href="/listings?category=Castles">
+          <div><i class="fa-brands fa-fort-awesome"></i></div>
+          <p>Castles</p>
+        </a>
       </div>
       <div class="filter">
-        <div><i class="fa-solid fa-person-swimming"></i></div>
-        <p>Amazing Pools</p>
+        <a href="/listings?category=Amazing Pools">
+          <div><i class="fa-solid fa-person-swimming"></i></div>
+          <p>Amazing Pools</p>
+        </a>
       </div>
       <div class="filter">
-        <div><i class="fa-solid fa-campground"></i></div>
-        <p>Camping</p>
+        <a href="/listings?category=Camping">
+          <div><i class="fa-solid fa-campground"></i></div>
+          <p>Camping</p>
+        </a>
       </div>
       <div class="filter">
-        <div><i class="fa-solid fa-cow"></i></div>
-        <p>Farms</p>
+        <a href="/listings?category=Farm">
+          <div><i class="fa-solid fa-cow"></i></div>
+          <p>Farms</p>
+        </a>
       </div>
       <div class="filter">
-        <div><i class="fa-solid fa-snowflake"></i></div>
-        <p>Arctic</p>
+        <a href="/listings?category=Arctic">
+          <div><i class="fa-solid fa-snowflake"></i></div>
+          <p>Arctic</p>
+        </a>
       </div>
       <div class="filter">
-        <div><i class="fa-solid fa-igloo"></i></div>
-        <p>Domes</p>
+        <a href="/listings?category=Domes">
+          <div><i class="fa-solid fa-igloo"></i></div>
+          <p>Domes</p>
+        </a>
       </div>
       <div class="filter">
-        <div><i class="fa-solid fa-sailboat"></i></div>
-        <p>Boats</p>
+        <a href="/listings?category=Boats">
+          <div><i class="fa-solid fa-sailboat"></i></div>
+          <p>Boats</p>
+        </a>
       </div>
 
       <div class="tax-switch">
@@ -94,59 +148,58 @@
           <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
         </div>
       </div>
-
-
     </div>
-    
 
     <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 listing-link mt-3">
-        <% for(let listing of allListings){ %>
-          <a href="/listings/<%= listing._id%>">
-            <div class="card col listing-card">
-                <img src="<%= listing.image.url %>" class="card-img-top" alt="Listing_image" style="height: 20rem">
-                <% let isChecked = false; %> <!-- Define isChecked -->
-                <div class="card-img-overlay">
-                  <% if (isChecked) { %>
-                    <div class="clicked"><i class="fa-solid fa-heart"></i></div>
-                  <% } else { %>
-                    <div class="not-clicked"><i class="fa-regular fa-heart"></i></div>
-                  <% } %>
-                </div>
-                <div class="card-body">
-                  <p class="card-text">
-                    <b><%= listing.title %></b><br>
-                    &#8377;  <%= listing.price.toLocaleString("en-IN") %> /night
-                    <i class="tax-info"> &nbsp; &nbsp; +18% GST</i>
-                  </p>
-                </div>
+      <% for(let listing of allListings){ %>
+        <div class="card col listing-card">
+          <div style="position: relative;">
+            <a href="/listings/<%= listing._id%>">
+              <img src="<%= listing.image.url %>" class="card-img-top" alt="Listing_image" style="height: 20rem">
+            </a>
+            <div class="card-img-overlay">
+              <form action="/listings/<%= listing._id %>/like" method="POST" style="z-index: 10;">
+                <button type="submit" class="like-btn">
+                  <% if (currUser && listing.likes && listing.likes.includes(currUser._id)) { %>
+                    <i class="fa-solid fa-heart liked"></i>
+                    <% } else { %>
+                      <i class="fa-regular fa-heart"></i>
+                      <% } %>
+                </button>
+              </form>
             </div>
-          </a>
+          </div>
+          <div class="card-body">
+            <p class="card-text">
+              <a href="/listings/<%= listing._id%>" class="listing-link-text"
+                style="text-decoration: none; color: inherit;">
+                <b>
+                  <%= listing.title %>
+                </b><br>
+                &#8377; <%= listing.price ? listing.price.toLocaleString("en-IN") : 0 %> /night
+                  <i class="tax-info"> &nbsp; &nbsp; +18% GST</i>
+              </a>
+            </p>
+          </div>
+        </div>
         <% } %>
     </div>
 
     <script>
       let taxSwitch = document.getElementById("flexSwitchCheckDefault");
-
-      let clicked = document.querySelector('.clicked');
-      let notClicked = document.querySelector('.not-clicked');
-
-      clicked.addEventListener('click', () => {
-        
-      })
-
       taxSwitch.addEventListener("click", () => {
 
-        let taxInfo = document.getElementsByClassName("tax-info"); 
+        let taxInfo = document.getElementsByClassName("tax-info");
 
-        for(info of taxInfo){
-          if(info.style.display != "inline"){
+        for (info of taxInfo) {
+          if (info.style.display != "inline") {
             info.style.display = "inline";
           } else {
             info.style.display = "none";
           }
-          
+
         }
       })
     </script>
-    
-</body>
+
+  </body>

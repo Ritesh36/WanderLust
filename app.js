@@ -1,4 +1,4 @@
-if(process.env.NODE_ENV != "production"){
+if (process.env.NODE_ENV != "production") {
     require("dotenv").config();
 }
 
@@ -20,18 +20,15 @@ const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/reviews.js");
 const userRouter = require("./routes/user.js");
 
-// const { cookie } = require("express/lib/response.js");
-
-// const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
-
-const dburl = process.env.ATLASDB_URL;
+const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
+const dburl = MONGO_URL;
 
 const store = MongoStore.create({
-    mongoUrl : dburl,
-    crypto : {
-        secret : process.env.SESSION_SECRET
+    mongoUrl: dburl,
+    crypto: {
+        secret: process.env.SESSION_SECRET
     },
-    touchAfter : 24 * 60 * 60
+    touchAfter: 24 * 60 * 60
 })
 
 store.on("error", (err) => {
@@ -40,22 +37,22 @@ store.on("error", (err) => {
 
 const sessionOptions = {
     store,
-    secret : process.env.SESSION_SECRET,
-    resave : false,
-    saveUninitialized : true,
-    cookie : {
-        expires : Date.now() + 7 * 24 * 60 * 60 * 1000,
-        maxAge : 7 * 24 * 60 * 60 * 1000,
-        httpOnly : true,
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+        httpOnly: true,
     }
 }
 
 main().then(() => {
     console.log("connected to server");
 })
-.catch((err) => {
-    console.log(err);
-})
+    .catch((err) => {
+        console.log(err);
+    })
 
 async function main() {
     await mongoose.connect(dburl);
@@ -64,7 +61,7 @@ async function main() {
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-app.use(express.urlencoded({extended : true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "/public")));
 app.use(session(sessionOptions));
@@ -79,11 +76,12 @@ passport.deserializeUser(User.deserializeUser());
 
 app.engine("ejs", ejsMate);
 
-app.use( (req, res, next) => {
-   res.locals.success = req.flash("success");
-   res.locals.error = req.flash("error");
-   res.locals.currUser = req.user;
-   next();
+app.use((req, res, next) => {
+    res.locals.success = req.flash("success");
+    res.locals.error = req.flash("error");
+    // ensure currUser is always present (null when not logged in) so EJS checks won't throw
+    res.locals.currUser = req.user || null;
+    next();
 })
 
 // app.get("/demouser", async(req, res) => {
@@ -107,8 +105,8 @@ app.all("*", (req, res, next) => {
     next(new ExpressError(404, "Page Not Found!"));
 })
 
-app.use( (err, req, res, next) => {
-    let {statusCode=500, message="Something Went Wrong!"} = err;
-    res.status(statusCode).render("error.ejs", {message});
+app.use((err, req, res, next) => {
+    let { statusCode = 500, message = "Something Went Wrong!" } = err;
+    res.status(statusCode).render("error.ejs", { message });
     // res.status(statusCode).send(message);
 })

@@ -75,7 +75,13 @@ module.exports.deleteListings = async (req, res) => {
 module.exports.searchListings = async (req, res) => {
     try {
         let query = req.query.q;
-        let searchResult = await Listing.find({ country: new RegExp(query, 'i') });
+        let searchResult = await Listing.find({
+            $or: [
+                { title: new RegExp(query, 'i') },
+                { location: new RegExp(query, 'i') },
+                { country: new RegExp(query, 'i') }
+            ]
+        });
         res.render("listings/search.ejs", { query, searchResult });
     } catch (err) {
         res.status(500).send("Error searching the database");

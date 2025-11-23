@@ -1,20 +1,23 @@
 <style>
-  .btn-search{
+  .btn-search {
     background-color: #fe424d;
     color: #fff;
     border-radius: 25px;
     /* padding: 0.4rem; */
     padding: 0.6rem 0.9rem;
   }
-  .btn-search:hover{
+
+  .btn-search:hover {
     background-color: #fe424d;
     color: white;
   }
-  .btn-search i{
+
+  .btn-search i {
     display: inline;
     margin-right: 0.5rem;
     margin-top: 0.25rem;
   }
+
   .search-inp {
     border-radius: 25px;
     padding: 0.6rem 2.5rem;
@@ -24,47 +27,43 @@
 
 
 <nav class="navbar navbar-expand-md bg-body-tertiary-light border-bottom sticky-top">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/listings"><i class="fa-regular fa-compass"></i></a>
-      <button class="navbar-toggler"
-        type="button" 
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav" 
-        aria-controls="navbarNav" 
-        aria-expanded="false" 
-        aria-label="Toggle navigation">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/listings"><i class="fa-regular fa-compass"></i></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 
-          <div class="navbar-nav">
-              <a class="nav-link" href="/listings">Explore</a>
-              &nbsp; &nbsp; 
-          </div>
-
-          <div class="navbar-nav ms-auto">
-            <form class="d-flex" role="search" method="GET" action="/listings/search">
-              <input class="form-control me-2 search-inp" type="search" placeholder="Search destinations" name="q">
-              <button class="btn btn-search" type="submit"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
-            </form>
-          </div>
-
-          <div class="navbar-nav ms-auto">
-                <a class="nav-link" href="/listings/new">Airbnb your home</a>
-                &nbsp; &nbsp;
-                <% if(typeof currUser === 'undefined' || !currUser){ %>
-                  <a class="nav-link" href="/signup"><b>Signup</b></a>
-                    &nbsp; &nbsp;
-                  <a class="nav-link" href="/login"><b>Login</b></a>
-                    &nbsp; &nbsp; 
-                 <% } %>
-                 <% if(typeof currUser !== 'undefined' && currUser){ %>
-                  <a class="nav-link" href="/logout"><b>Logout</b></a>
-                  &nbsp; &nbsp;
-                 <% } %>
-          </div>
-
+      <div class="navbar-nav">
+        <a class="nav-link" href="/listings">Explore</a>
+        &nbsp; &nbsp;
+        <a class="nav-link" href="/ai-assist">AI Assistant</a>
       </div>
+
+      <div class="navbar-nav ms-auto">
+        <form class="d-flex" role="search" method="GET" action="/listings/search">
+          <input class="form-control me-2 search-inp" type="search" placeholder="Search destinations" name="q">
+          <button class="btn btn-search" type="submit"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
+        </form>
+      </div>
+
+      <div class="navbar-nav ms-auto">
+        <a class="nav-link" href="/listings/new">Airbnb your home</a>
+        &nbsp; &nbsp;
+        <% if(typeof currUser==='undefined' || !currUser){ %>
+          <a class="nav-link" href="/signup"><b>Signup</b></a>
+          &nbsp; &nbsp;
+          <a class="nav-link" href="/login"><b>Login</b></a>
+          &nbsp; &nbsp;
+          <% } %>
+            <% if(typeof currUser !=='undefined' && currUser){ %>
+              <a class="nav-link" href="/logout"><b>Logout</b></a>
+              &nbsp; &nbsp;
+              <% } %>
+      </div>
+
     </div>
-  </nav>
+  </div>
+</nav>

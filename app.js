@@ -19,6 +19,7 @@ const User = require("./models/user.js");
 const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/reviews.js");
 const userRouter = require("./routes/user.js");
+const aiRouter = require("./routes/ai.js");
 
 const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
 const dburl = MONGO_URL;
@@ -93,9 +94,14 @@ app.use((req, res, next) => {
 //     res.send(registeredUser);
 // })
 
+app.get("/", (req, res) => {
+    res.redirect("/listings");
+});
+
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter);
+app.use("/ai-assist", aiRouter);
 
 app.listen(8080, () => {
     console.log("Server listening on http://localhost:8080");

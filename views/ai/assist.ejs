@@ -1,0 +1,46 @@
+<% layout("/layouts/boilerplate") %>
+
+    <div class="row mt-3">
+        <div class="col-8 offset-2">
+            <h3>AI Travel Assistant</h3>
+            <p>Let our AI help you plan your perfect trip!</p>
+
+            <form action="/ai-assist" method="POST" class="needs-validation" novalidate>
+                <div class="mb-3">
+                    <label for="budget" class="form-label">Your Budget (e.g., 50000 INR, $1000)</label>
+                    <input type="text" name="budget" placeholder="Enter your budget" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="season" class="form-label">Preferred Season / Time</label>
+                    <input type="text" name="season" placeholder="e.g., Winter, December, Summer" class="form-control"
+                        required>
+                </div>
+
+                <button class="btn btn-dark add-btn">Get Recommendations</button>
+            </form>
+
+            <% if (recommendations) { %>
+                <hr>
+                <div class="mt-4 mb-4">
+                    <h4>Recommendations for you:</h4>
+                    <div class="row">
+                        <% for(let rec of recommendations) { %>
+                            <div class="col-md-6 mb-4">
+                                <div class="card h-100 shadow-sm">
+                                    <div class="card-body p-3">
+                                        <h5 class="card-title text-primary"><%= rec.name %></h5>
+                                        <p class="card-text"><%= rec.description %></p>
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item"><strong>Cost:</strong> <%= rec.cost %></li>
+                                            <li class="list-group-item"><strong>Why <%= season %>:</strong> <%= rec.reason %></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        <% } %>
+                    </div>
+                </div>
+                <% } %>
+        </div>
+    </div>

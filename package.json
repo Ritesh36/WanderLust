@@ -1,4 +1,10 @@
 {
+  "scripts": {
+    "start": "node app.js"
+  },
+  "engines": {
+    "node": "20.x"
+  },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
     "cloudinary": "^1.21.0",

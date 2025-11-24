@@ -21,8 +21,7 @@ const reviewRouter = require("./routes/reviews.js");
 const userRouter = require("./routes/user.js");
 const aiRouter = require("./routes/ai.js");
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
-const dburl = MONGO_URL;
+const dburl = process.env.ATLASDB_URL;
 
 const store = MongoStore.create({
     mongoUrl: dburl,
@@ -30,10 +29,10 @@ const store = MongoStore.create({
         secret: process.env.SESSION_SECRET
     },
     touchAfter: 24 * 60 * 60
-})
+});
 
 store.on("error", (err) => {
-    console.log(err);
+    console.log("SESSION STORE ERROR", err);
 });
 
 const sessionOptions = {
@@ -85,15 +84,6 @@ app.use((req, res, next) => {
     next();
 })
 
-// app.get("/demouser", async(req, res) => {
-//     let fakeUser = new User({
-//         email: "student@gmail.com",
-//         username: "Ritesh"
-//     });
-//     const registeredUser = await User.register(fakeUser, "Pass@123");
-//     res.send(registeredUser);
-// })
-
 app.get("/", (req, res) => {
     res.redirect("/listings");
 });
@@ -103,10 +93,6 @@ app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter);
 app.use("/ai-assist", aiRouter);
 
-app.listen(8080, () => {
-    console.log("Server listening on http://localhost:8080");
-})
-
 app.all("*", (req, res, next) => {
     next(new ExpressError(404, "Page Not Found!"));
 })
@@ -114,5 +100,8 @@ app.all("*", (req, res, next) => {
 app.use((err, req, res, next) => {
     let { statusCode = 500, message = "Something Went Wrong!" } = err;
     res.status(statusCode).render("error.ejs", { message });
-    // res.status(statusCode).send(message);
+})
+
+app.listen(8080, () => {
+    console.log("Server listening on http://localhost:8080");
 })

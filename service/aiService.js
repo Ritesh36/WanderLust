@@ -2,11 +2,11 @@ const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
-async function getTravelRecommendations(budget, season) {
+async function getTravelRecommendations(budget, season, people) {
   const model = genAI.getGenerativeModel({ model: "gemini-2.5-pro" });
 
-  const prompt = `I am planning a trip. My budget is ${budget} and the preferred season/time is ${season}. 
-  Please suggest 3-5 travel destinations that would be perfect for this budget and season. 
+  const prompt = `I am planning a trip for ${people} people. My budget is ${budget} and the preferred season/time is ${season}. 
+  Please suggest 3-5 travel destinations that would be perfect for this budget, group size, and season. 
   
   Strictly output the result as a JSON array of objects. Do not include any markdown formatting (like \`\`\`json).
   Each object should have the following keys:

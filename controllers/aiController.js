@@ -6,8 +6,8 @@ module.exports.renderAssistForm = (req, res) => {
 
 module.exports.getRecommendations = async (req, res) => {
     try {
-        const { budget, season } = req.body;
-        const recommendationsText = await getTravelRecommendations(budget, season);
+        const { budget, season, people } = req.body;
+        const recommendationsText = await getTravelRecommendations(budget, season, people);
 
         // Clean up the text in case it contains markdown code blocks
         let cleanText = recommendationsText.replace(/```json/g, '').replace(/```/g, '').trim();

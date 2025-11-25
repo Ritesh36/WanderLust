@@ -60,6 +60,7 @@ async function main() {
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
+app.engine("ejs", ejsMate);
 
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
@@ -74,12 +75,9 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-app.engine("ejs", ejsMate);
-
 app.use((req, res, next) => {
-    res.locals.success = req.flash("success");
-    res.locals.error = req.flash("error");
-    // ensure currUser is always present (null when not logged in) so EJS checks won't throw
+    res.locals.success = req.flash("success")[0] || "";
+    res.locals.error = req.flash("error")[0] || "";
     res.locals.currUser = req.user || null;
     next();
 })

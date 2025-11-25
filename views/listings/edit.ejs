@@ -2,7 +2,7 @@
 <body>
     <br>
     <div class="row">
-        <div class="col-8 offset-2">
+        <div class="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2">
     <h3>Edit your Listing</h3>
     <form method="POST" action="/listings/<%= listing._id%>?_method=PUT" novalidate class="needs-validation" enctype="multipart/form-data">
 
@@ -20,7 +20,7 @@
 
         <div class="mb-3">
             <p>Previously Uploaded Image</p>
-            <img src="<%= originalImageUrl %>" alt="Listing_img" height="200px" width="250px">
+            <img src="<%= originalImageUrl %>" alt="Listing_img" class="img-fluid" style="max-height: 200px; max-width: 100%;">
         </div>
 
 
@@ -30,7 +30,7 @@
         </div>
 
         <div class="row">
-            <div class="mb-3 col-md-4">
+            <div class="mb-3 col-12 col-md-4">
                 <label for="price" class="form-label">Price</label>
                 <input value="<%=listing.price%>" name="listing[price]" type="number" class="form-control" required>
                 <div class="invalid-feedback">Price should valid</div>

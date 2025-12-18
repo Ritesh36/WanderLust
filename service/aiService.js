@@ -3,8 +3,6 @@ const { GoogleGenerativeAI } = require("@google/generative-ai");
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 async function getTravelRecommendations(budget, season, people) {
-  const model = genAI.getGenerativeModel({ model: "gemini-2.5-pro" });
-
   const prompt = `I am planning a trip for ${people} people. My budget is ${budget} and the preferred season/time is ${season}. 
   Please suggest 3-5 travel destinations that would be perfect for this budget, group size, and season. 
   
@@ -25,10 +23,24 @@ async function getTravelRecommendations(budget, season, people) {
     }
   ]`;
 
-  const result = await model.generateContent(prompt);
-  const response = result.response;
-  const text = response.text();
-  return text;
+  const modelsToTry = ["gemini-1.5-flash", "gemini-1.5-pro", "gemini-pro"];
+
+  for (const modelName of modelsToTry) {
+    try {
+      const model = genAI.getGenerativeModel({ model: modelName });
+      const result = await model.generateContent(prompt);
+      const response = result.response;
+      return response.text();
+    } catch (error) {
+      console.error(`Error with model ${modelName}:`, error.message);
+      if (modelName === modelsToTry[modelsToTry.length - 1]) {
+        // If this was the last model, throw the error
+        throw error;
+      }
+      // Otherwise continue to next model
+      console.log("Switching to next model...");
+    }
+  }
 }
 
 module.exports = { getTravelRecommendations };

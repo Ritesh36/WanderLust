@@ -16,9 +16,9 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: your-frontend-image:latest
+        image: 
         ports:
         - containerPort: 80
         env:
         - name: BACKEND_URL
-          value: "http://backend-service:8080"
+          value: 

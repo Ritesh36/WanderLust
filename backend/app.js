@@ -21,7 +21,10 @@ const reviewRouter = require("./routes/reviews.js");
 const userRouter = require("./routes/user.js");
 const aiRouter = require("./routes/ai.js");
 
-const dburl = process.env.ATLASDB_URL;
+const localDbUrl = "mongodb://127.0.0.1:27017/wanderlust";
+const dburl = process.env.ATLASDB_URL && process.env.ATLASDB_URL.includes("cluster0.fd4ggnv.mongodb.net")
+    ? localDbUrl
+    : (process.env.ATLASDB_URL || localDbUrl);
 
 const store = MongoStore.create({
     mongoUrl: dburl,
